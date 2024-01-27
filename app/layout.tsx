@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import reddit from "../public/reddit.png";
 import Image from "next/image";
+import Navicons from "@/components/Navicons";
 import { BsThreeDots } from "react-icons/bs";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -47,10 +49,8 @@ export default function RootLayout({
             </div>
           </div>
           <div>
-            <div className="flex space-x-3 items-center justify-center">
-             <LoginLink  className="bg-orange-500 text-white rounded-full py-2 px-4 focus:outline-none">Sign Up</LoginLink>
-             <BsThreeDots className=" cursor-pointer"/>
-             </div>
+           <Navicons/>
+             
           </div>
         </nav>
         <div className="border-[1.35px] border-gray-600"></div>

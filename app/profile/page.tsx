@@ -9,13 +9,13 @@ const page = async() => {
   
     user = await getUser();
     const loggedIn=await isAuthenticated();
- 
+    console.log(user);
     if(!loggedIn){
       redirect("/api/auth/login");
     }
   return (
     <>
-      <h1>User Page</h1>
+      <h1>User profile page</h1>
       <LogoutLink className=" h-[48px] w-[120px] bg-blue-600 text-white">
         Log out
       </LogoutLink>
