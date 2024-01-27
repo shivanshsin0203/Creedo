@@ -3,7 +3,7 @@ const { getUser } = getKindeServerSession();
 const {isAuthenticated}=getKindeServerSession();
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { redirect } from "next/navigation";
-
+import { toast } from "sonner"
 const page = async() => {
   let user: any;
   

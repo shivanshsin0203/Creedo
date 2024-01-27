@@ -3,6 +3,7 @@
 import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
 import {LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
 export default function ClientPage() {
     const {
         permissions,
@@ -35,7 +36,7 @@ export default function ClientPage() {
     console.log("accessToken", accessToken);
     console.log(getClaim("aud"));
     if (isLoading) return <div className=" justify-center items-center"><Skeleton/></div>;
-
+     
     return (
         <div className="pt-20">
            

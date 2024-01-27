@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Toaster } from "@/components/ui/sonner"
+
+
 import {
   RegisterLink,
   LoginLink,
@@ -53,10 +56,16 @@ export default function RootLayout({
           </div>
         </nav>
         <div className="border-[1.5px] border-gray-600 mt-[49px]"></div>
+         <div className=" flex flex-row"> 
          <div className="fixed top-[50px] left-0 bottom-0 w-[18%] h-screen opacity-100 bg-black ">
           hWFWEFWFF 
          </div>
+         <div className="border-[1.5px] border-gray-600  h-screen ml-[18%]">
+         </div>
+         
         {children}
+        </div>
+        <Toaster />
       </body>
     </html>
   );

@@ -8,6 +8,10 @@ import { BsThreeDots } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner"
+import { useEffect } from "react";
+
+
 const Navicons = () => {
   const {
     permissions,
@@ -32,7 +36,17 @@ const Navicons = () => {
   } = useKindeBrowserClient();
   // Empty dependency array ensures the effect runs only once on mount
   const router = useRouter();
-  if (isLoading) return <div className=" text-slate-100 font-thin">Loading..</div>;
+  useEffect(() => {
+    if (!isLoading) {
+      toast("You are Signed In");
+      
+    }
+  }, [isLoading]);
+  if (isLoading){ 
+    
+  return <div className=" text-slate-100 font-thin">Loading..</div>;
+  }
+
   return (
     <>
       {isAuthenticated ? (
