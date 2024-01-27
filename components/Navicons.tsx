@@ -36,17 +36,19 @@ const Navicons = () => {
   } = useKindeBrowserClient();
   // Empty dependency array ensures the effect runs only once on mount
   const router = useRouter();
+  
   useEffect(() => {
     if (!isLoading) {
       toast("You are Signed In");
       
     }
   }, [isLoading]);
+  if(isAuthenticated){
   if (isLoading){ 
-    
-  return <div className=" text-slate-100 font-thin">Loading..</div>;
+    return <div className=" text-slate-100 font-thin">Loading..</div>;
   }
-
+}
+ console.log(isLoading +"vsvgsvsv s s ssf");
   return (
     <>
       {isAuthenticated ? (

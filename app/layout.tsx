@@ -12,6 +12,7 @@ import reddit from "../public/reddit.png";
 import Image from "next/image";
 import Navicons from "@/components/Navicons";
 import { BsThreeDots } from "react-icons/bs";
+import Sidebar from "@/components/Sidebar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -58,7 +59,7 @@ export default function RootLayout({
         <div className="border-[1.5px] border-gray-600 mt-[49px]"></div>
          <div className=" flex flex-row"> 
          <div className="fixed top-[50px] left-0 bottom-0 w-[18%] h-screen opacity-100 bg-black ">
-          hWFWEFWFF 
+          <Sidebar/>
          </div>
          <div className="border-[1.5px] border-gray-600  h-screen ml-[18%]">
          </div>
