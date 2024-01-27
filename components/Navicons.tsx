@@ -7,7 +7,7 @@ import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { BsThreeDots } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
-
+import { Skeleton } from "@/components/ui/skeleton";
 const Navicons = () => {
   const {
     permissions,
@@ -32,24 +32,25 @@ const Navicons = () => {
   } = useKindeBrowserClient();
   // Empty dependency array ensures the effect runs only once on mount
   const router = useRouter();
+  if (isLoading) return <div className=" text-slate-100 font-thin">Loading..</div>;
   return (
     <>
       {isAuthenticated ? (
         <div className="flex space-x-5 items-center justify-center pr-3">
           <CgProfile
-            className="cursor-pointer text-2xl hover:scale-125 transition-all"
+            className="cursor-pointer text-2xl hover:scale-125 hover:text-slate-300 transition-all text-white"
             onClick={() => {
               router.push("/profile");
             }}
           />
           <IoIosNotifications
-            className="cursor-pointer text-2xl hover:scale-125 transition-all"
+            className="cursor-pointer text-2xl hover:scale-125 hover:text-slate-300 transition-all text-white"
             onClick={() => {
               router.push("/notification");
             }}
           />
           <IoChatbubbleEllipsesOutline
-            className="cursor-pointer text-2xl hover:scale-125 transition-all "
+            className="cursor-pointer text-2xl hover:scale-125 hover:text-slate-300 transition-all text-white "
             onClick={() => {
               router.push("/connection");
             }}
