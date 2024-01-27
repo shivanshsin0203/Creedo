@@ -15,7 +15,7 @@ const page = async() => {
     }
   return (
     <>
-      <h1>User profile page</h1>
+      <h1 className=" mt-18">User profile page</h1>
       <LogoutLink className=" h-[48px] w-[120px] bg-blue-600 text-white">
         Log out
       </LogoutLink>

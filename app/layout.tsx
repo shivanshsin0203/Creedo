@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
+import {
+  RegisterLink,
+  LoginLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import reddit from "../public/reddit.png";
@@ -18,11 +21,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="bg-[#0B1416] flex flex-row justify-between p-4 items-center h-[49px]">
+        <nav className="bg-[#0B1416] flex flex-row justify-between p-4 items-center h-[49px] fixed top-0 left-0 right-0 ">
           <div className="flex space-x-3 items-center cursor-pointer">
             <Image src={reddit} alt="Reddit png" width={39} height={39} />
             <span className="text-2xl font-extrabold text-white">creedo</span>
@@ -41,19 +43,19 @@ export default function RootLayout({
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                 >
-                  <path
-                    d="M14.086 12.73a8 8 0 111.415-1.415l5.85 5.85-1.415 1.415-5.85-5.85zM15 8a7 7 0 10-14 0 7 7 0 0014 0z"
-                  ></path>
+                  <path d="M14.086 12.73a8 8 0 111.415-1.415l5.85 5.85-1.415 1.415-5.85-5.85zM15 8a7 7 0 10-14 0 7 7 0 0014 0z"></path>
                 </svg>
               </div>
             </div>
           </div>
           <div>
-           <Navicons/>
-             
+            <Navicons />
           </div>
         </nav>
-        <div className="border-[1.35px] border-gray-600"></div>
+        <div className="border-[1.5px] border-gray-600 mt-[49px]"></div>
+         <div className="fixed top-[50px] left-0 bottom-0 w-[18%] h-screen opacity-100 bg-black ">
+          hWFWEFWFF 
+         </div>
         {children}
       </body>
     </html>

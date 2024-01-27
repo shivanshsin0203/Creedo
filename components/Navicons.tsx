@@ -1,17 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
-import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
-import {LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
+
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { IoIosNotifications } from "react-icons/io";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { BsThreeDots } from "react-icons/bs";
-import { useRouter } from 'next/navigation'
-
-
-
+import { useRouter } from "next/navigation";
+import { CgProfile } from "react-icons/cg";
 
 const Navicons = () => {
-  
   const {
     permissions,
     isLoading,
@@ -31,16 +28,32 @@ const Navicons = () => {
     getOrganization,
     getPermissions,
     getUserOrganizations,
-    isAuthenticated
-} = useKindeBrowserClient();
-   // Empty dependency array ensures the effect runs only once on mount
-   const router = useRouter()
+    isAuthenticated,
+  } = useKindeBrowserClient();
+  // Empty dependency array ensures the effect runs only once on mount
+  const router = useRouter();
   return (
     <>
       {isAuthenticated ? (
-        <div className="flex space-x-3 items-center justify-center pr-3">
-          <IoIosNotifications className="cursor-pointer text-2xl" onClick={()=>{router.push('/notification')}} />
-          <IoChatbubbleEllipsesOutline className="cursor-pointer text-2xl" onClick={()=>{router.push('/connection')}}/>
+        <div className="flex space-x-5 items-center justify-center pr-3">
+          <CgProfile
+            className="cursor-pointer text-2xl hover:scale-125 transition-all"
+            onClick={() => {
+              router.push("/profile");
+            }}
+          />
+          <IoIosNotifications
+            className="cursor-pointer text-2xl hover:scale-125 transition-all"
+            onClick={() => {
+              router.push("/notification");
+            }}
+          />
+          <IoChatbubbleEllipsesOutline
+            className="cursor-pointer text-2xl hover:scale-125 transition-all "
+            onClick={() => {
+              router.push("/connection");
+            }}
+          />
         </div>
       ) : (
         <div className="flex space-x-3 items-center justify-center">
