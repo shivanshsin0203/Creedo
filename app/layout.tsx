@@ -58,7 +58,7 @@ export default function RootLayout({
         </nav>
         <div className="border-[1.5px] border-gray-600 mt-[49px]"></div>
          <div className=" flex flex-row"> 
-         <div className="fixed top-[50px] left-0 bottom-0 w-[18%] h-screen opacity-100 bg-black ">
+         <div className="fixed top-[49px] left-0 bottom-0 w-[18%] h-screen opacity-100 bg-black ">
           <Sidebar/>
          </div>
          <div className="border-[1.5px] border-gray-600  h-screen ml-[18%]">

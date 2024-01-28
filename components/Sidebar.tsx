@@ -40,7 +40,7 @@ const Sidebar = () => {
       <div className=" text-gray-500 text-start font-medium text-sm pl-3">
         FEATURES
       </div>
-      <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer">
+      <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer" onClick={()=>{router.push('/profile')}}>
         <CgProfile className="text-xl text-white ml-3 " />
         <span className="text-white text-lg font-normal">Profile</span>
       </div>
@@ -49,14 +49,14 @@ const Sidebar = () => {
         <span className="text-white text-lg font-normal">Chats</span>
       </div>
       <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer">
-        <IoChatbubbleEllipsesOutline className="text-xl text-white ml-3 " />
+        <IoIosNotifications className="text-xl text-white ml-3 " />
         <span className="text-white text-lg font-normal">Notification</span>
       </div>
       <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer">
         <FaPeopleArrows className="text-xl text-white ml-3 " />
         <span className="text-white text-lg font-normal">Connections</span>
       </div>
-      <div className="border-[1.5px] border-gray-600 "></div>
+       <div className="border-[1.5px] border-gray-600 "></div>
       <div >
         <Avatar className=" ml-[43%] mt-11">
           <AvatarImage src={user?.picture} />
