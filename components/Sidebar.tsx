@@ -105,7 +105,7 @@ const Sidebar = () => {
       <span className="text-white text-lg font-normal">Connections</span>
     </div>
     <div className=" ml-5 pl-4">
-        <RegisterLink className="bg-slate-600 text-destructive-foreground shadow-sm  hover:scale-105 hover:bg-orange-400 transition-all w-[90%]  mt-9 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4 py-2">
+        <RegisterLink className="bg-slate-600 text-destructive-foreground shadow-sm  hover:scale-105 hover:bg-orange-400 transition-all w-[90%]  mt-9 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4 py-2" >
             Sign In
         </RegisterLink>
         </div>
