@@ -3,6 +3,7 @@ import { GoRepoPush } from "react-icons/go";
 import { IoHomeOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { FaUserFriends } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
@@ -12,7 +13,7 @@ import { ChatBubbleIcon } from "@radix-ui/react-icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Button } from "./ui/button";
-
+import AddFriend from "./Friend"
 const Sidebar = () => {
     const {
         permissions,
@@ -56,6 +57,10 @@ const Sidebar = () => {
         <FaPeopleArrows className="text-xl text-white ml-3 " />
         <span className="text-white text-lg font-normal">Connections</span>
       </div>
+      <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer">
+    <FaUserFriends className="text-xl text-white ml-3 " />
+     <AddFriend/>
+    </div>
        <div className="border-[1.5px] border-gray-600 "></div>
       <div >
         <Avatar className=" ml-[43%] mt-11">
@@ -104,6 +109,7 @@ const Sidebar = () => {
       <FaPeopleArrows className="text-xl text-white ml-3 " />
       <span className="text-white text-lg font-normal">Connections</span>
     </div>
+    
     <div className=" ml-5 pl-4">
         <RegisterLink className="bg-slate-600 text-destructive-foreground shadow-sm  hover:scale-105 hover:bg-orange-400 transition-all w-[90%]  mt-9 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4 py-2" >
             Sign In
