@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { use, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,12 +13,14 @@ import {
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { io } from "socket.io-client";
 import axios from "axios";
 
 const AddFriend = () => {
   const [email, setEmail] = useState<string>("");
   const [results, setResult] = useState<any>(false);
   const [message, setMessage] = useState<any>("");
+  const [socket, setSocket] = useState<any>(null);
   const { user } = useKindeBrowserClient();
   const from = user?.email;
   async function addFriend() {
@@ -31,11 +33,28 @@ const AddFriend = () => {
       setResult(resultReceived.data.result);
       setMessage(resultReceived.data.message);
       console.log(resultReceived.data);
+      if (resultReceived.data.result) {
+        console.log(socket);
+        socket.emit("friend_request", { to: email });
+      }
     } catch (error) {
       console.error("Error adding friend:", error);
     }
   }
+  useEffect(() => {
+    const newSocket = io("http://localhost:3001", {
+      withCredentials: true,
+      extraHeaders: {
+        "my-custom-header": "abcd",
+      },
+    });
 
+    newSocket.on("connect", () => {
+      console.log("connected");
+    });
+
+    setSocket(newSocket);
+  }, [user]);
   return (
     <Dialog>
       <DialogTrigger asChild>
