@@ -27,13 +27,12 @@ const AddFriend = () => {
         "http://localhost:3005/addfriend",
         { to: email, from: from }
       );
-      
+
       setResult(resultReceived.data.result);
       setMessage(resultReceived.data.message);
       console.log(resultReceived.data);
     } catch (error) {
       console.error("Error adding friend:", error);
-      // Handle the error, for example, set an error state or display a message to the user
     }
   }
 

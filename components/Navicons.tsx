@@ -7,9 +7,9 @@ import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { BsThreeDots } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
-import { Skeleton } from "@/components/ui/skeleton";
+import { io } from 'socket.io-client';
 import { toast } from "sonner"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 const Navicons = () => {
@@ -36,17 +36,31 @@ const Navicons = () => {
   } = useKindeBrowserClient();
   // Empty dependency array ensures the effect runs only once on mount
   const router = useRouter();
-  
+  const [socket, setSocket] = useState(null);
   useEffect(() => {
     if (!isLoading) {
       toast("You are Signed In");
       
     }
   }, [isLoading]);
+  useEffect(() => {
+    const newSocket = io('http://localhost:3001', {
+      withCredentials: true,
+      extraHeaders: {
+        'my-custom-header': 'abcd',
+      },
+    });
+    
+    newSocket.on('connect', () => {
+      console.log('connected');
+    });
+  }, [user]);
+
   if(isAuthenticated){
   if (isLoading){ 
     return <div className=" text-slate-100 font-thin">Loading..</div>;
   }
+  
 }
  console.log(isLoading +"vsvgsvsv s s ssf");
   return (

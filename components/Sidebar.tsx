@@ -64,7 +64,7 @@ const Sidebar = () => {
        <div className="border-[1.5px] border-gray-600 "></div>
       <div >
         <Avatar className=" ml-[43%] mt-11">
-          <AvatarImage src={user?.picture} />
+          <AvatarImage src={user?.picture || ''} />
           <AvatarFallback>{user?.given_name?.charAt(0)}</AvatarFallback>
         </Avatar>
       </div>
