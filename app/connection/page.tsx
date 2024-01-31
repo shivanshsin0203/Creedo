@@ -33,12 +33,16 @@ const Connection = () => {
     const data=requests.filter((item:any)=>item.from!==request.from);
     setRequests(data);
     toast("Friend Request Accepted");
+    const responce=axios.post('http://localhost:3005/acceptfriendrequest',{requestid:request._id,user1_email:user?.email,user1_name:user?.given_name,user1_picture:user?.picture,user2_email:request.from,user2_name:request.name,user2_picture:request.picture});
+    console.log(responce);
   }
   function handleRejectFreind(event:any,request:any){
   
     const data=requests.filter((item:any)=>item.from!==request.from);
     setRequests(data);
     toast("Friend Request Rejected");
+    const response=axios.post('http://localhost:3005/deletefriendrequest',{requestid:request._id})
+    console.log(response);
   }
   useEffect(() => {
     getPendingRequests();
