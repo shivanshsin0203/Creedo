@@ -4,6 +4,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
+import { MdOutlinePersonAddAlt } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
@@ -58,7 +59,7 @@ const Sidebar = () => {
         <span className="text-white text-lg font-normal">Connections</span>
       </div>
       <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer">
-    <FaUserFriends className="text-xl text-white ml-3 " />
+    <MdOutlinePersonAddAlt className="text-xl text-white ml-3 " />
      <AddFriend/>
     </div>
        <div className="border-[1.5px] border-gray-600 "></div>

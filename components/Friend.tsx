@@ -23,11 +23,13 @@ const AddFriend = () => {
   const [socket, setSocket] = useState<any>(null);
   const { user } = useKindeBrowserClient();
   const from = user?.email;
+  const username = user?.given_name;
+  const userPic = user?.picture;
   async function addFriend() {
     try {
       const resultReceived = await axios.post(
         "http://localhost:3005/addfriend",
-        { to: email, from: from }
+        { to: email, from: from,name:username,picture:userPic },
       );
 
       setResult(resultReceived.data.result);
