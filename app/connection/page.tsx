@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TiTickOutline } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
+import { Button } from "@/components/ui/button";
 
 const Connection = () => {
   const { user } = useKindeBrowserClient();
@@ -25,7 +26,8 @@ const Connection = () => {
   };
   
   async function getFriends() {
-    const result = await axios.post("http://localhost:3005/getfriends", { email: user?.email });
+    const result = await axios.post("http://localhost:3005/getconnections", { email: user?.email });
+    console.log(result.data.result);
     setFriends(result.data.result);
   }
   function handleAddFreind(event:any,request:any){
@@ -35,7 +37,13 @@ const Connection = () => {
     toast("Friend Request Accepted");
     const responce=axios.post('http://localhost:3005/acceptfriendrequest',{requestid:request._id,user1_email:user?.email,user1_name:user?.given_name,user1_picture:user?.picture,user2_email:request.from,user2_name:request.name,user2_picture:request.picture});
     console.log(responce);
-  }
+    const add: any = [...friends, {
+      freind_email: request.from,
+      freind_name: request.name,
+      freind_picture: request.picture
+    }];
+    setFriends(add);
+      }
   function handleRejectFreind(event:any,request:any){
   
     const data=requests.filter((item:any)=>item.from!==request.from);
@@ -46,7 +54,9 @@ const Connection = () => {
   }
   useEffect(() => {
     getPendingRequests();
+    getFriends();
   }, [user]);
+ 
 
   return (
     <>
@@ -85,6 +95,34 @@ const Connection = () => {
         ) : (
           <div className="text-slate-100 font-thin mt-1 p-4">.....No Pending Requests</div>
         )}
+         
+         <div className=" text-white font-extrabold  text-2xl mt-3 p-5">
+          {`All Connections [${friends.length}]`} 
+        </div>
+        {friends.length > 0 ? (
+          friends.map((freind: any) => (
+            <div className="flex flex-col bg-slate-900 p-4 m-4 rounded-xl" key={freind.id}>
+              <div className="flex flex-row justify-between">
+                <div className="flex flex-row">
+                <Avatar className=" w-12 h-12 rounded-full">
+          <AvatarImage src={freind?.freind_picture || ''} />
+          <AvatarFallback>{freind?.freind_name?.charAt(0)}</AvatarFallback>
+        </Avatar>
+                  <div className="flex flex-col ml-4">
+                    <div className="text-slate-100 font-semibold">{freind.freind_name}</div>
+                    <div className="text-slate-100 font-thin">{freind.freind_email}</div>
+                  </div>
+                </div>
+                <div className="flex flex-row space-x-5 mt-[5.6px]">
+                   <Button className=" outline-1 text-blue-300 bg-slate-700 hover:bg-slate-600 hover:scale-105 hover:transition-all" >View Profile</Button>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="text-slate-100 font-thin mt-1 p-4">.....No Connections Yet</div>
+        )}
+         
       </div>
     </>
   );
