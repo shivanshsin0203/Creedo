@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDropzone, FileError } from "react-dropzone";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 interface FileWithPreview extends File {
   preview: string;
@@ -18,6 +19,10 @@ const Dropzone = ({ className }: { className?: string }) => {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
   const [rejected, setRejected] = useState<RejectedFile[]>([]);
   const [title, setTitle] = useState<string>("");
+  const [discription, setDiscription] = useState<string>("");
+  const [image, setImage] = useState<any>([]);
+  function handlePost() {
+  }
   const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: File[]) => {
     if (acceptedFiles.length) {
       setFiles((previousFiles) => [
@@ -97,6 +102,7 @@ const Dropzone = ({ className }: { className?: string }) => {
       }).then((res) => res.json());
       console.log(data);
       toast("Image Uploaded");
+      setImage((prev:any) => [...prev, data.secure_url]);
     });
   };
 
@@ -121,6 +127,27 @@ const Dropzone = ({ className }: { className?: string }) => {
         />
         <div className=" text-sm text-slate-400">{`${title.length}/30`}</div>
       </div>
+      <div className=" text-slate-300 text-2xl p-4 mt-4">Discription</div>
+       <div className=" flex space-x-1 items-center">
+       <textarea
+          
+          placeholder="Discription [Optional]"
+          className="bg-gray-700 text-white border border-gray-600 rounded-sm py-1 px-3 focus:outline-none focus:border-blue-500 w-[80%] h-[150px] ml-3"
+          onChange={(e) => {
+            if (e.target.value.length <= 300) {
+              setDiscription(e.target.value);
+            } else {
+              toast("Discription should be less than 300 characters");
+            }
+          }}
+        />
+                <div className=" text-sm text-slate-400">{`${discription.length}/300`}</div>
+
+       </div>
+       <div className=" flex mt-1 justify-end space-x-5 items-center mr-[20%] ">
+        <span className=" text-slate-400 text-sm">Upload Image if you want before Posting</span>
+        <Button variant={"secondary"} className=" hover:scale-110 hover:bg-slate-300" onClick={handlePost} >Post</Button>
+       </div>
       <form onSubmit={handleSubmit}>
         <div
           {...getRootProps({
@@ -141,8 +168,8 @@ const Dropzone = ({ className }: { className?: string }) => {
         </div>
 
         {/* Preview */}
-        <section className="mt-10">
-          <div className="flex gap-4 p-4">
+        <section className="mt-10 bg-black">
+          <div className="flex gap-4 p-4 bg-black">
             <h2 className="title text-3xl font-semibold text-slate-200">
               Preview
             </h2>
