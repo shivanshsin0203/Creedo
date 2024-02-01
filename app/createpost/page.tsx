@@ -5,7 +5,9 @@ import { useDropzone, FileError } from "react-dropzone";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-
+import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 interface FileWithPreview extends File {
   preview: string;
 }
@@ -16,12 +18,23 @@ interface RejectedFile {
 }
 
 const Dropzone = ({ className }: { className?: string }) => {
+    const {user}=useKindeBrowserClient();
+    const router=useRouter();
   const [files, setFiles] = useState<FileWithPreview[]>([]);
   const [rejected, setRejected] = useState<RejectedFile[]>([]);
   const [title, setTitle] = useState<string>("");
   const [discription, setDiscription] = useState<string>("");
   const [image, setImage] = useState<any>([]);
-  function handlePost() {
+  
+  async function handlePost() {
+    const result = await axios.post("http://localhost:3005/createpost", {
+        creator: user?.email,
+        title: title,
+        discription: discription,
+        image: image,
+        });
+      toast("Post Created",{className:"bg-green-500"});
+      router.push("/");
   }
   const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: File[]) => {
     if (acceptedFiles.length) {
@@ -170,7 +183,7 @@ const Dropzone = ({ className }: { className?: string }) => {
         {/* Preview */}
         <section className="mt-10 bg-black">
           <div className="flex gap-4 p-4 bg-black">
-            <h2 className="title text-3xl font-semibold text-slate-200">
+            <h2 className="title text-3xl font-semibold text-slate-200 p-2">
               Preview
             </h2>
             <button
@@ -189,7 +202,7 @@ const Dropzone = ({ className }: { className?: string }) => {
           </div>
 
           {/* Accepted files */}
-          <h3 className="title text-lg font-semibold text-neutral-300 mt-10 border-b pb-3 border-b-slate-500">
+          <h3 className="title text-lg font-semibold text-neutral-300 mt-10 border-b pb-3 border-b-slate-500 p-2">
             Accepted Files
           </h3>
           <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-10 p-3">
@@ -224,7 +237,7 @@ const Dropzone = ({ className }: { className?: string }) => {
 
           {/* Rejected Files */}
           <div className=" bg-black">
-            <h3 className="title text-lg font-semibold text-neutral-300 mt-24 border-b pb-3  border-b-slate-500 bg-black">
+            <h3 className="title text-lg font-semibold text-neutral-300 mt-24 border-b pb-3  border-b-slate-500 bg-black p-2">
               Rejected Files
             </h3>
             <ul className="mt-6 flex flex-col bg-black">
