@@ -75,7 +75,7 @@ const Dropzone = ({ className }) => {
         })}
       >
         <input {...getInputProps()} />
-        <div className='flex flex-col items-center justify-center gap-4'>
+        <div className='flex flex-col items-center justify-center gap-4 cursor-pointer'>
           <ArrowUpTrayIcon className='w-5 h-5 fill-current' />
           {isDragActive ? (
             <p>Drop the files here ...</p>
