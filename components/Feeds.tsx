@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { routeModule } from "next/dist/build/templates/app-page";
+import HomeSkeleton from "./HomeSkeleton";
 const Feed = () => {
   const [posts, setPosts] = useState([]); // Use any type for posts
   const [first, setFirst] = useState(true);
@@ -158,7 +159,7 @@ const Feed = () => {
           ))
          
         ) : (
-          <div className=" text-white">Loading...</div>
+          <HomeSkeleton/>
         )}
       </div>
     </>
