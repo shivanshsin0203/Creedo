@@ -11,12 +11,15 @@ import {
 } from "@/components/ui/carousel";
 import { FaCommentAlt, FaShare } from "react-icons/fa";
 import { FaRegCommentAlt } from "react-icons/fa";
-
+import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
+import { routeModule } from "next/dist/build/templates/app-page";
 const Feed = () => {
   const [posts, setPosts] = useState([]); // Use any type for posts
   const [first, setFirst] = useState(true);
+  const [loading,setLoading]= useState(false)
+  const route = useRouter();
   let length = posts.length;
   useEffect(() => {
     async function fetchData() {
@@ -60,9 +63,17 @@ const Feed = () => {
     console.log(result.data.data);
     console.log(posts);
   }
+  async function handleUserClick(event:any,post: any) {
+    
+    const result= await axios.post('http://localhost:3005/finduser',{email:post.creator})
+    
+    const userId=result.data.result[0]._id;
+    route.push(`profilepage/${userId}`)
+  }
   return (
     <>
       <div className=" w-full h-full bg-black  ">
+        
         {posts.length > 0 ? (
           posts.map((post: any) => (
             <div key={post.id} className=" w-[100%] h-auto  bg-black p-3 ">
@@ -84,7 +95,7 @@ const Feed = () => {
                         {post?.creator?.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
-                    <span className=" text-xs text-slate-300 font-semibold hover:underline cursor-pointer">
+                    <span className=" text-xs text-slate-300 font-semibold hover:underline cursor-pointer" onClick={(event:any)=>{handleUserClick(event,post)}}>
                       {post.creator}
                     </span>
                   </div>
@@ -143,7 +154,9 @@ const Feed = () => {
                 </div>
               </div>
             </div>
+            
           ))
+         
         ) : (
           <div className=" text-white">Loading...</div>
         )}

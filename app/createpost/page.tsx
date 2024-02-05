@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import { useDropzone, FileError } from "react-dropzone";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { toast } from "sonner";
@@ -18,7 +18,7 @@ interface RejectedFile {
 }
 
 const Dropzone = ({ className }: { className?: string }) => {
-    const {user}=useKindeBrowserClient();
+    const {user,isAuthenticated}=useKindeBrowserClient();
     const router=useRouter();
   const [files, setFiles] = useState<FileWithPreview[]>([]);
   const [rejected, setRejected] = useState<RejectedFile[]>([]);
@@ -27,6 +27,10 @@ const Dropzone = ({ className }: { className?: string }) => {
   const [image, setImage] = useState<any>([]);
   
   async function handlePost() {
+    if(!isAuthenticated){
+      router.push('/api/auth/login')
+      return;
+    }
     const result = await axios.post("http://localhost:3005/createpost", {
         creator: user?.email,
         title: title,
@@ -88,7 +92,10 @@ const Dropzone = ({ className }: { className?: string }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    if(!isAuthenticated){
+      router.push('/api/auth/login')
+      return;
+    }
     if (!files.length) return;
 
     // const formData = new FormData();
@@ -118,7 +125,7 @@ const Dropzone = ({ className }: { className?: string }) => {
       setImage((prev:any) => [...prev, data.secure_url]);
     });
   };
-
+     
   return (
     <div className="w-screen h-screen bg-black">
       <div className=" text-slate-200 font-semibold text-3xl p-4 text-center mb-5">
