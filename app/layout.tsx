@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="bg-[#0B1416] flex flex-row justify-between p-4 items-center h-[49px] fixed top-0 left-0 right-0 ">
+        <nav className="bg-[#0B1416] flex flex-row justify-between p-4 items-center h-[49px] fixed top-0 left-0 right-0 z-50 ">
           <div className="flex space-x-3 items-center cursor-pointer">
             <Image src={reddit} alt="Reddit png" width={39} height={39} />
             <span className="text-2xl font-extrabold text-white">creedo</span>
