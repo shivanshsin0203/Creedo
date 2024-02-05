@@ -147,14 +147,14 @@ const Dropzone = ({ className }: { className?: string }) => {
           placeholder="Discription [Optional]"
           className="bg-gray-700 text-white border border-gray-600 rounded-sm py-1 px-3 focus:outline-none focus:border-blue-500 w-[80%] h-[150px] ml-3"
           onChange={(e) => {
-            if (e.target.value.length <= 300) {
+            if (e.target.value.length <= 600) {
               setDiscription(e.target.value);
             } else {
-              toast("Discription should be less than 300 characters");
+              toast("Discription should be less than 600 characters");
             }
           }}
         />
-                <div className=" text-sm text-slate-400">{`${discription.length}/300`}</div>
+                <div className=" text-sm text-slate-400">{`${discription.length}/600`}</div>
 
        </div>
        <div className=" flex mt-1 justify-end space-x-5 items-center mr-[20%] ">

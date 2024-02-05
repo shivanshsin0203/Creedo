@@ -65,10 +65,10 @@ const Feed = () => {
       <div className=" w-full h-full bg-black  ">
         {posts.length > 0 ? (
           posts.map((post: any) => (
-            <div key={post.id} className=" w-[100%] h-screen bg-black mb-0 p-3">
+            <div key={post.id} className=" w-[100%] h-auto  bg-black p-3 ">
               <div
                 key={post.id}
-                className=" w-[72%] h-[90%] bg-[#1A1A1B] ml-[58px] flex space-x-4"
+                className=" w-[72%] h-auto bg-[#1A1A1B] ml-[58px] flex space-x-4"
               >
                 <div className=" flex flex-col items-center p-1">
                   <LuArrowBigUp className=" text-3xl text-slate-500 font-light hover:text-red-500 hover:scale-105 hover:transition-all " />
@@ -88,11 +88,18 @@ const Feed = () => {
                       {post.creator}
                     </span>
                   </div>
-                  <div className=" text-slate-200 font-medium text-lg">
+                  <div className=" text-slate-200 font-medium text-xl">
                     {post.title}
                   </div>
+
                   {post.image.length > 0 ? (
                     <div>
+                      <div>
+                        <p className=" text-slate-200 font-normal text-lg">{`${post.discription.substring(
+                          0,
+                          200
+                        )} ...`}</p>
+                      </div>
                       <Carousel className=" w-[80%] ">
                         <CarouselContent className=" w-full h-[20%]">
                           {post.image.map((image: any, index: any) => (
@@ -102,7 +109,8 @@ const Feed = () => {
                                 alt="Image"
                                 width={700}
                                 height={300}
-                               className=" object-contain "></Image>
+                                className=" object-contain "
+                              ></Image>
                             </CarouselItem>
                           ))}
                         </CarouselContent>
@@ -111,18 +119,27 @@ const Feed = () => {
                       </Carousel>
                     </div>
                   ) : (
-                    <div> </div>
-                  )}
-                  <div className=" flex space-x-3 justify-start items-center mb-0 cursor-pointer">
                     <div>
-                      <div className=" flex space-x-1 justify-center items-center">
+                      
+                      <div>
+                        <p className=" text-slate-200 font-normal text-lg">{`${post.discription.substring(0,300)}  ... Read More`}</p>
+                      </div>
+                    </div>
+                  )}
+                  <div className=" flex space-x-3 justify-start items-center mb-0 cursor-pointer mt-3">
+                    <div className=" flex space-x-1 justify-center items-center">
                       <FaCommentAlt className=" text-lg text-slate-500 font-light hover:text-red-500 hover:scale-105 hover:transition-all " />
                       <span className=" text-slate-400 text-xs font-medium ">
                         comments
                       </span>
-                      </div>
-                      </div>
                     </div>
+                    <div className=" flex space-x-1 justify-center items-center">
+                      <FaShare className=" text-lg text-slate-500 font-light hover:text-red-500 hover:scale-105 hover:transition-all " />
+                      <span className=" text-slate-400 text-xs font-medium ">
+                        share
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
