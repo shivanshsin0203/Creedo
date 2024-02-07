@@ -68,6 +68,20 @@ const Feed = () => {
     const userId=result.data.result[0]._id;
     route.push(`profilepage/${userId}`)
   }
+  async function updateLike(post:any) {
+    const postIndex = posts.findIndex(postprev => postprev._id === post._id);
+    if(postIndex !== -1) {
+      const newPosts:any = [...posts];
+      newPosts[postIndex].likes += 1;
+      setPosts(newPosts);
+      const likes_count=newPosts[postIndex].likes;
+      const result= await axios.post('http://localhost:3005/updatelike',{id:post._id,likes:likes_count,})
+      
+    }
+    else{
+      console.log("Not found")
+    }
+  }
   return (
     <>
       <div className=" w-full h-full bg-black  ">
@@ -93,7 +107,7 @@ const Feed = () => {
                 className=" w-[72%] h-auto bg-[#1A1A1B] ml-[58px] flex space-x-4"
               >
                 <div className=" flex flex-col items-center p-1">
-                  <LuArrowBigUp className=" text-3xl text-slate-500 font-light hover:text-red-500 hover:scale-105 hover:transition-all " />
+                  <LuArrowBigUp className=" text-3xl text-slate-500 font-light hover:text-red-500 hover:scale-105 hover:transition-all " onClick={()=>updateLike(post)} />
                   <span className=" text-white text-lg font-medium ">
                     {post.likes}
                   </span>
