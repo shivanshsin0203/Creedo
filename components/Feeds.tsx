@@ -14,12 +14,14 @@ import { FaRegCommentAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import { routeModule } from "next/dist/build/templates/app-page";
 import HomeSkeleton from "./HomeSkeleton";
 const Feed = () => {
   const [posts, setPosts] = useState([]); // Use any type for posts
   const [first, setFirst] = useState(true);
-  const [loading,setLoading]= useState(false)
+  const [hasMore,sethasMore]=useState(true)
   const route = useRouter();
   let length = posts.length;
   useEffect(() => {
@@ -36,33 +38,28 @@ const Feed = () => {
     }
     fetchData();
   }, [first]);
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop + 1 >=
-      document.documentElement.scrollHeight
-    ) {
-      nextPosts();
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-  }, []);
+  
   async function nextPosts() {
+   
     console.log("nextPosts");
-    console.log(posts.length + "p length");
+    console.log(length + "old length");
     const result = await axios.post("http://localhost:3005/posts", {
       posts: length,
     });
-
+    console.log(result.data.data + " Next time");
     if (Array.isArray(result.data.data) && result.data.data.length > 0) {
+     
+      console.log(posts)
       setPosts((prev) => [...prev, ...result.data.data]);
-      length = length + result.data.data.length;
       console.log(length + " length");
+      length = length + 2;
+      
     } else {
-      return;
+      sethasMore(false)
     }
     console.log(result.data.data);
     console.log(posts);
+   
   }
   async function handleUserClick(event:any,post: any) {
     
@@ -74,6 +71,19 @@ const Feed = () => {
   return (
     <>
       <div className=" w-full h-full bg-black  ">
+        <InfiniteScroll
+        dataLength={posts.length}
+        next={nextPosts}
+        hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
+        
+        endMessage={
+          <p style={{ textAlign: "center" }} className=" bg-black">
+              <b className=" bg-black text-slate-400">Yay! You have seen it all</b>
+            </p>
+        }
+        >
+
         
         {posts.length > 0 ? (
           posts.map((post: any) => (
@@ -161,6 +171,7 @@ const Feed = () => {
         ) : (
           <HomeSkeleton/>
         )}
+        </InfiniteScroll>
       </div>
     </>
   );
