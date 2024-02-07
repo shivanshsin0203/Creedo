@@ -75,8 +75,8 @@ const Feed = () => {
       newPosts[postIndex].likes += 1;
       setPosts(newPosts);
       const likes_count=newPosts[postIndex].likes;
-      const result= await axios.post('http://localhost:3005/updatelike',{id:post._id,likes:likes_count,})
-      
+      const result= await axios.post('http://localhost:3005/updatelike',{id:post._id})
+
     }
     else{
       console.log("Not found")

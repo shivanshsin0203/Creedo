@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
 import { io } from "socket.io-client";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense } from "react";
 
 const Navicons = () => {
   const {

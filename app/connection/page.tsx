@@ -8,12 +8,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TiTickOutline } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "@/components/ui/button";
-
+import LoadingSpinner from "@/components/ConnectionSkeleton";
 const Connection = () => {
   const { user } = useKindeBrowserClient();
   const [requests, setRequests] = useState<any>([]);
   const [friends, setFriends] = useState<any>([]);
-
+  const [loading,setLoading]=useState<boolean>(true);
   async function getPendingRequests() {
     const result = await axios.post("http://localhost:3005/getfriendrequests", { email: user?.email });
     setRequests(result.data.result);
@@ -29,6 +29,7 @@ const Connection = () => {
     const result = await axios.post("http://localhost:3005/getconnections", { email: user?.email });
     console.log(result.data.result);
     setFriends(result.data.result);
+    
   }
   function handleAddFreind(event:any,request:any){
    
@@ -53,10 +54,20 @@ const Connection = () => {
     console.log(response);
   }
   useEffect(() => {
+    setLoading(true);
     getPendingRequests();
     getFriends();
+    setLoading(false);
   }, [user]);
- 
+  if(loading){
+    
+    return<>
+    <div className=" w-screen h-screen bg-black">
+    <LoadingSpinner/>
+    </div>
+    </> 
+    
+  }
 
   return (
     <>
