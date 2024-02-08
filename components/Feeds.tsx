@@ -82,6 +82,9 @@ const Feed = () => {
       console.log("Not found")
     }
   }
+  async function handlePost(post:any){
+   route.push(`post/${post._id}`)
+  }
   return (
     <>
       <div className=" w-full h-full bg-black  ">
@@ -130,7 +133,7 @@ const Feed = () => {
 
                   {post.image.length > 0 ? (
                     <div>
-                      <div>
+                      <div className=" cursor-pointer " onClick={()=>{handlePost(post)}}>
                         <p className=" text-slate-200 font-normal text-lg">{`${post.discription.substring(
                           0,
                           200
@@ -157,7 +160,7 @@ const Feed = () => {
                   ) : (
                     <div>
                       
-                      <div>
+                      <div className=" cursor-pointer " onClick={()=>{handlePost(post)}}>
                         <p className=" text-slate-200 font-normal text-lg">{`${post.discription.substring(0,300)}  ... Read More`}</p>
                       </div>
                     </div>
