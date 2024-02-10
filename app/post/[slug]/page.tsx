@@ -1,4 +1,5 @@
 "use client";
+import HomeSkeleton from "@/components/HomeSkeleton";
 import RightBar from "@/components/RightBar"
 import SinglePost from "@/components/SinglePost"
 import axios from "axios"
@@ -16,7 +17,7 @@ export default  function Page({ params }: { params: { slug: string } }) {
   fetchData();
   },[])
   if(post.length===0){
-    return <div>Loading...</div>
+    return <div className="w-screen h-screen flex bg-black"><HomeSkeleton/></div>
   }
   return  <div className=" w-screen h-screen flex bg-black">
   <div className=" w-[70%] h-screen bg-black ">

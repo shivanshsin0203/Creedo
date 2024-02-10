@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
 import { io } from "socket.io-client";
 import { toast } from "sonner";
+import axios from "axios";
 import { useEffect, useState,Suspense } from "react";
 
 const Navicons = () => {
@@ -38,6 +39,7 @@ const Navicons = () => {
   const router = useRouter();
   const [socket, setSocket] = useState<any>(null);
   const [newConnection, setNewConnection] = useState<boolean>(false);
+  const [notification, setNotification] = useState<any>(0);
   useEffect(() => {
     if (!isLoading) {
       toast("You are Signed In");
@@ -60,6 +62,13 @@ const Navicons = () => {
         setNewConnection(true);
       }
     });
+    newSocket.on('recived_new_post',async (data)=>{
+      const result= await axios.post('http://localhost:3005/isfriend',{freind:data.creator,user:user?.email})
+      if(result.data.result){
+        setNotification(notification+1);
+        toast(`You have recived new post from ${data.name} `);
+      }
+    })
     setSocket(newSocket);
   }, [user]);
 
@@ -84,12 +93,17 @@ const Navicons = () => {
           bg-red-600 text-slate-100 shadow-slate-900">1</div>:null}
            
           </div>
+          <div className="flex flex-col">
           <IoIosNotifications
             className="cursor-pointer text-2xl hover:scale-125 hover:text-slate-300 transition-all text-white"
             onClick={() => {
-              router.push("/notification");
+              setNotification(0);
+              router.push("/connection");
             }}
           />
+          {notification>0?<div className="absolute shadow w-4 h-4 text-[0.65rem] leading-tight font-medium rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-all duration-300 
+          bg-red-600 text-slate-100 shadow-slate-900">{notification}</div>:null}
+          </div>
           <IoChatbubbleEllipsesOutline
             className="cursor-pointer text-2xl hover:scale-125 hover:text-slate-300 transition-all text-white "
             onClick={() => {

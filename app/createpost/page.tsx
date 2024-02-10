@@ -4,6 +4,7 @@ import { use, useCallback, useEffect, useState } from "react";
 import { useDropzone, FileError } from "react-dropzone";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { toast } from "sonner";
+import { io } from "socket.io-client";
 import { Button } from "@/components/ui/button";
 import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
 import axios from "axios";
@@ -23,6 +24,7 @@ const Dropzone = ({ className }: { className?: string }) => {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
   const [rejected, setRejected] = useState<RejectedFile[]>([]);
   const [title, setTitle] = useState<string>("");
+  const [socket, setSocket] = useState<any>(null);
   const [discription, setDiscription] = useState<string>("");
   const [image, setImage] = useState<any>([]);
   
@@ -38,6 +40,7 @@ const Dropzone = ({ className }: { className?: string }) => {
         image: image,
         });
       toast("Post Created",{className:"bg-green-500"});
+      socket.emit("new_post", { creator: user?.email,name:user?.given_name });
       router.push("/");
   }
   const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: File[]) => {
@@ -125,7 +128,20 @@ const Dropzone = ({ className }: { className?: string }) => {
       setImage((prev:any) => [...prev, data.secure_url]);
     });
   };
-     
+  useEffect(() => {
+    const newSocket = io("http://localhost:3001", {
+      withCredentials: true,
+      extraHeaders: {
+        "my-custom-header": "abcd",
+      },
+    });
+
+    newSocket.on("connect", () => {
+      console.log("connected");
+    });
+
+    setSocket(newSocket);
+  }, [user]); 
   return (
     <div className="w-screen h-screen bg-black">
       <div className=" text-slate-200 font-semibold text-3xl p-4 text-center mb-5">

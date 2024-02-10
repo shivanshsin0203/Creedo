@@ -16,12 +16,14 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
+import HomeSkeleton from "./HomeSkeleton";
 
 const SinglePost = ({ post }) => {
   const route = useRouter();
   const { user, isAuthenticated } = useKindeBrowserClient();
   const [comment, setComment] = useState<String>("");
   const [comments, setComments] = useState<any>([]);
+  const [loading,setLoading]=useState<boolean>(true);
   const handleUserClick = async (comment:any) => {
     
     const result= await axios.post('http://localhost:3005/finduser',{email:comment.creator})
@@ -67,7 +69,9 @@ const SinglePost = ({ post }) => {
       setComments(result.data.result);
     }
     fetchData();
+    setLoading(false);
   }, []);
+  
   return (
     <div className="w-full h-auto bg-black p-3">
       <div className="w-[72%] h-auto bg-[#1A1A1B] ml-[58px] flex space-x-4">
@@ -120,7 +124,8 @@ const SinglePost = ({ post }) => {
       <div className="  ">
         <div className=" ml-[58px] w-[72%] p-3 text-xs text-slate-300 bg-[#1A1A1B]">{`Comment as ${user?.email}`}</div>
         <textarea
-          className="ml-[58px] w-[72%] h-[98px] bg-[#1A1A1B] border border-slate-600 text-slate-300 p-2 overflow-y-hidden overflow-y-hidden"
+          className="ml-[58px] w-[72%] h-[98px] bg-[#1A1A1B] border border-slate-600 text-slate-300 p-2 overflow-y-hidden overflow-x-hidden"
+          placeholder="Write a comment.."
           onChange={(e) => {
             setComment(e.target.value);
           }}
