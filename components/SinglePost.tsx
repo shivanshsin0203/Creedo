@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { LuArrowBigUp } from "react-icons/lu";
 import { FaCommentAlt, FaShare } from "react-icons/fa";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-
+import { io } from "socket.io-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import {
@@ -23,7 +23,7 @@ const SinglePost = ({ post }) => {
   const { user, isAuthenticated } = useKindeBrowserClient();
   const [comment, setComment] = useState<String>("");
   const [comments, setComments] = useState<any>([]);
-  const [loading,setLoading]=useState<boolean>(true);
+  const [socket, setSocket] = useState<any>(null);
   const handleUserClick = async (comment:any) => {
     
     const result= await axios.post('http://localhost:3005/finduser',{email:comment.creator})
@@ -54,6 +54,7 @@ const SinglePost = ({ post }) => {
       };
       setComments((prev: any) => [...prev, newComment] );
       setComment("");
+      socket.emit("comment", {creator:post?.creator})
     } else {
       route.push("/api/auth/login");
     }
@@ -69,9 +70,22 @@ const SinglePost = ({ post }) => {
       setComments(result.data.result);
     }
     fetchData();
-    setLoading(false);
+   
   }, []);
-  
+  useEffect(() => {
+    const newSocket = io("http://localhost:3001", {
+      withCredentials: true,
+      extraHeaders: {
+        "my-custom-header": "abcd",
+      },
+    });
+
+    newSocket.on("connect", () => {
+      console.log("connected");
+    });
+
+    setSocket(newSocket);
+  }, [user]); 
   return (
     <div className="w-full h-auto bg-black p-3">
       <div className="w-[72%] h-auto bg-[#1A1A1B] ml-[58px] flex space-x-4">

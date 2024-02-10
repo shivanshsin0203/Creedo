@@ -69,6 +69,12 @@ const Navicons = () => {
         toast(`You have recived new post from ${data.name} `);
       }
     })
+    newSocket.on('new_comment', (data)=>{
+      if(data.creator === user?.email){
+        setNotification(notification+1);
+        toast(`You have recived new comment on post `);
+      }
+    })
     setSocket(newSocket);
   }, [user]);
 
