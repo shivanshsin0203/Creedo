@@ -187,11 +187,11 @@ const Dropzone = ({ className }: { className?: string }) => {
       <form onSubmit={handleSubmit}>
         <div
           {...getRootProps({
-            className: `p-16 mt-10 border border-neutral-500 bg-slate-900 ${className}`,
+            className: `p-16 mt-10 border border-neutral-500 bg-slate-900  ${className}`,
           })}
         >
           <input {...getInputProps()} />
-          <div className="flex flex-col items-center justify-center gap-4">
+          <div className="flex flex-col items-center justify-center gap-4 ">
             <ArrowUpTrayIcon className="w-5 h-5 fill-current text-white" />
             {isDragActive ? (
               <p className=" text-slate-300">Drop the files here ...</p>

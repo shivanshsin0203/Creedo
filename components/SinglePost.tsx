@@ -16,7 +16,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
-import HomeSkeleton from "./HomeSkeleton";
 
 const SinglePost = ({ post }) => {
   const route = useRouter();

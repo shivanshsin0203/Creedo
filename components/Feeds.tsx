@@ -61,12 +61,9 @@ const Feed = () => {
     console.log(posts);
    
   }
-  async function handleUserClick(event:any,post: any) {
+ function handleUserClick(event:any,post: any) {
     
-    const result= await axios.post('http://localhost:3005/finduser',{email:post.creator})
-    
-    const userId=result.data.result[0]._id;
-    route.push(`profilepage/${userId}`)
+    route.push(`profilepage/${post.creator}`)
   }
   async function updateLike(post:any) {
     const postIndex = posts.findIndex(postprev => postprev._id === post._id);

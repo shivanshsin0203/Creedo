@@ -42,9 +42,9 @@ const Sidebar = () => {
       <div className=" text-gray-500 text-start font-medium text-sm pl-3">
         FEATURES
       </div>
-      <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer" onClick={()=>{router.push('/profile')}}>
+      <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer"onClick={()=>{router.push(`/profilepage/${user?.email}`)}}>
         <CgProfile className="text-xl text-white ml-3 " />
-        <span className="text-white text-lg font-normal">Profile</span>
+        <span className="text-white text-lg font-normal" >Profile</span>
       </div>
       
       <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer">
