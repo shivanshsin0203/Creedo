@@ -76,7 +76,7 @@
 }
 /* styles.css */
 ::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  width: 6px; /* Width of the scrollbar */
   background-color: #1a202c; /* Background color of the scrollbar */
 }
 
@@ -86,7 +86,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #00eeff, #4c70af); /* Gradient for the scrollbar thumb (neon blue to green) */
-  border-radius: 4px; /* Border radius of the scrollbar thumb */
+  border-radius: 3px; /* Border radius of the scrollbar thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -1,13 +1,29 @@
+"use client"
 import axios from "axios"
-import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
+import {useTypewriter,Cursor,Typewriter} from "react-simple-typewriter"
+const page =  () => {
 
-const page = async () => {
- const {getUser}= getKindeServerSession() 
- const user= await getUser()
-  const result= await axios.post('http://localhost:3005/register',user)
-  console.log(result)
   return (
-    <div>page</div>
+    <div className=" h-screen w-screen bg-black">
+      <div>
+        <span className=" flex text-slate-200 text-center text-4xl font-semibold justify-center items-center mt-[20%]">
+        <Typewriter
+                words={["Welcome to the platform Creedo "," Create like connect and have fun"]}
+                loop={5000}
+                cursor
+                cursorStyle='_'
+                typeSpeed={80}
+                deleteSpeed={60}
+                delaySpeed={10}
+                
+              />
+              <span className=" text-red-400">
+              <Cursor />
+              </span>
+             
+        </span>
+      </div>
+    </div>
   )
 }
 
