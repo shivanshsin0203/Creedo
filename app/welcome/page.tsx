@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import axios from "axios"
 import {useTypewriter,Cursor,Typewriter} from "react-simple-typewriter"
 import { useRouter } from "next/navigation";
-const page =  () => {
+const Page =  () => {
   const route = useRouter();
 
   return (
@@ -36,4 +36,4 @@ const page =  () => {
   )
 }
 
-export default page
+export default Page
