@@ -18,7 +18,7 @@ const AddFriend = () => {
     const [email,setEmail] = useState('');
     const [result,setResult] = useState('');
     async function addFriend(){
-        const result=axios.post('http://localhost:3005/addfriend',{email:email})
+        const result=axios.post('https://creedo.onrender.com/addfriend',{email:email})
     }
   return (
      (

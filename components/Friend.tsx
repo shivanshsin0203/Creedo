@@ -28,7 +28,7 @@ const AddFriend = () => {
   async function addFriend() {
     try {
       const resultReceived = await axios.post(
-        "http://localhost:3005/addfriend",
+        "https://creedo.onrender.com/addfriend",
         { to: email, from: from,name:username,picture:userPic },
       );
 

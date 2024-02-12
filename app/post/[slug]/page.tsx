@@ -9,7 +9,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.post("http://localhost:3005/getpostbyid", {
+      const result = await axios.post("https://creedo.onrender.com/getpostbyid", {
         id: params.slug,
       });
       const posts = result.data.result;

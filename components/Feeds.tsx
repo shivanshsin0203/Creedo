@@ -26,7 +26,7 @@ const Feed = () => {
   let length = posts.length;
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.post("http://localhost:3005/posts", {
+      const result = await axios.post("https://creedo.onrender.com/posts", {
         posts: 0,
       });
 
@@ -43,7 +43,7 @@ const Feed = () => {
    
     console.log("nextPosts");
     console.log(length + "old length");
-    const result = await axios.post("http://localhost:3005/posts", {
+    const result = await axios.post("https://creedo.onrender.com/posts", {
       posts: length,
     });
     console.log(result.data.data + " Next time");
@@ -72,7 +72,7 @@ const Feed = () => {
       newPosts[postIndex].likes += 1;
       setPosts(newPosts);
       const likes_count=newPosts[postIndex].likes;
-      const result= await axios.post('http://localhost:3005/updatelike',{id:post._id})
+      const result= await axios.post('https://creedo.onrender.com/updatelike',{id:post._id})
 
     }
     else{

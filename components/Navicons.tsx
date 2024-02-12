@@ -63,7 +63,7 @@ const Navicons = () => {
       }
     });
     newSocket.on('recived_new_post',async (data)=>{
-      const result= await axios.post('http://localhost:3005/isfriend',{freind:data.creator,user:user?.email})
+      const result= await axios.post('https://creedo.onrender.com/isfriend',{freind:data.creator,user:user?.email})
       if(result.data.result){
         setNotification(notification+1);
         toast(`You have recived new post from ${data.name} `);
