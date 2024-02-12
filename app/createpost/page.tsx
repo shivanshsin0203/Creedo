@@ -18,7 +18,7 @@ interface RejectedFile {
   errors: FileError[];
 }
 
-const Dropzone = ({ className }: { className?: string }) => {
+const Dropzone = () => {
     const {user,isAuthenticated}=useKindeBrowserClient();
     const router=useRouter();
   const [files, setFiles] = useState<FileWithPreview[]>([]);
@@ -61,7 +61,7 @@ const Dropzone = ({ className }: { className?: string }) => {
         ...previousFiles,
         ...rejectedFiles.map((file) => ({
           file,
-          errors: file.errors || [], // 'errors' property may not exist in File type
+          errors: (file as any).errors || [], // 'errors' property may not exist in File type
         })),
       ]);
     }
@@ -187,7 +187,7 @@ const Dropzone = ({ className }: { className?: string }) => {
       <form onSubmit={handleSubmit}>
         <div
           {...getRootProps({
-            className: `p-16 mt-10 border border-neutral-500 bg-slate-900  ${className}`,
+            className: `p-16 mt-10 border border-neutral-500 bg-slate-900 `,
           })}
         >
           <input {...getInputProps()} />
