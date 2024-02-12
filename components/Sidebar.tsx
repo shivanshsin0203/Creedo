@@ -51,7 +51,7 @@ const Sidebar = () => {
         <IoIosNotifications className="text-xl text-white ml-3 " />
         <span className="text-white text-lg font-normal">Notification</span>
       </div>
-      <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer">
+      <div className="flex space-x-11 rounded-md  hover:bg-slate-600 active:bg-slate-500 items-center justify-start ml-4 h-9 cursor-pointer" onClick={()=>{router.push('/connection')}}>
         <FaPeopleArrows className="text-xl text-white ml-3 " />
         <span className="text-white text-lg font-normal">Connections</span>
       </div>

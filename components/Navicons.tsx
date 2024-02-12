@@ -87,7 +87,7 @@ const Navicons = () => {
   return (
     <>
       {isAuthenticated ? (
-        <div className="flex space-x-5 items-center justify-center pr-3">
+        <div className="flex space-x-5 items-center justify-center pr-3 ">
           <div className="flex flex-col">
           <FaUserFriends
             className="cursor-pointer text-2xl hover:scale-125 hover:text-slate-300 transition-all text-white"
@@ -111,7 +111,7 @@ const Navicons = () => {
           bg-red-600 text-slate-100 shadow-slate-900">{notification}</div>:null}
           </div>
           <IoChatbubbleEllipsesOutline
-            className="cursor-pointer text-2xl hover:scale-125 hover:text-slate-300 transition-all text-white "
+            className="cursor-pointer text-2xl hover:scale-125 hover:text-slate-300 transition-all text-white hidden lg:block md:block "
             onClick={() => {
               router.push("/connection");
             }}

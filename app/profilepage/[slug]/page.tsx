@@ -28,10 +28,10 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         ) : (
           <>
-            <div className="w-[70%] h-screen bg-black ">
+            <div className="md:w-[70%] lg:w-[70%] w-screen h-screen bg-black ">
               <Profile user={user} /> {/* Pass user object to Profile component */}
             </div>
-            <div className="w-[25%] h-screen bg-black fixed right-0 top-[49px]">
+            <div className="w-[25%] h-screen bg-black fixed right-0 top-[49px] hidden md:block lg:block">
               <RightBar />
             </div>
           </>

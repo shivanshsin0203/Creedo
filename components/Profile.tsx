@@ -63,7 +63,7 @@ const Profile = ({ user }) => {
         <div key={post.id} className="w-full h-auto bg-black p-3">
           <div
             key={post.id}
-            className="w-[72%] h-auto bg-[#1A1A1B] ml-[58px] flex space-x-4"
+            className="md:w-[72%] lg:w-[72%] w-full h-auto bg-[#1A1A1B] md:ml-[58px] lg:ml-[58px] ml-0 flex space-x-4"
           >
             <div className="flex flex-col items-center p-1">
               <LuArrowBigUp

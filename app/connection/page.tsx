@@ -9,11 +9,13 @@ import { TiTickOutline } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/ConnectionSkeleton";
+import { useRouter } from "next/navigation";
 const Connection = () => {
   const { user } = useKindeBrowserClient();
   const [requests, setRequests] = useState<any>([]);
   const [friends, setFriends] = useState<any>([]);
   const [loading,setLoading]=useState<boolean>(true);
+  const router = useRouter();
   async function getPendingRequests() {
     const result = await axios.post("http://localhost:3005/getfriendrequests", { email: user?.email });
     setRequests(result.data.result);
@@ -75,7 +77,7 @@ const Connection = () => {
         <div className="text-2xl font-semibold text-slate-200 p-4">Pending Requests</div>
         {requests.length > 0 ? (
           requests.map((request: any) => (
-            <div className="flex flex-col bg-slate-900 p-4 m-4 rounded-xl" key={request.id}>
+            <div className="flex flex-col bg-slate-900 p-4 m-4 rounded-xl " key={request.id}>
               <div className="flex flex-row justify-between">
                 <div className="flex flex-row">
                 <Avatar className=" w-12 h-12 rounded-full">
@@ -124,8 +126,8 @@ const Connection = () => {
                     <div className="text-slate-100 font-thin">{freind.freind_email}</div>
                   </div>
                 </div>
-                <div className="flex flex-row space-x-5 mt-[5.6px]">
-                   <Button className=" outline-1 text-blue-300 bg-slate-700 hover:bg-slate-600 hover:scale-105 hover:transition-all" >View Profile</Button>
+                <div className="flex flex-row space-x-5 mt-[5.6px] hidden md:block lg:block">
+                   <Button className=" outline-1 text-blue-300 bg-slate-700 hover:bg-slate-600 hover:scale-105 hover:transition-all" onClick={()=>{router.replace(`/profilepage/${freind.freind_email}`)}}  >View Profile</Button>
                 </div>
               </div>
             </div>

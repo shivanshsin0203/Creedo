@@ -28,12 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="bg-[#0B1416] flex flex-row justify-between p-4 items-center h-[49px] fixed top-0 left-0 right-0 z-50 ">
+        <nav className="bg-[#0B1416] flex flex-row justify-between p-4 items-center h-[49px] fixed top-0 left-0 right-0 z-50 w-screen ">
           <div className="flex space-x-3 items-center cursor-pointer">
             <Image src={reddit} alt="Reddit png" width={39} height={39} />
             <span className="text-2xl font-extrabold text-white">creedo</span>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center hidden md:block lg:block">
             <div className="relative">
               <input
                 type="text"
@@ -58,10 +58,10 @@ export default function RootLayout({
         </nav>
         <div className="border-[1.5px] border-gray-600 mt-[49px]"></div>
          <div className=" flex flex-row"> 
-         <div className="fixed top-[49px] left-0 bottom-0 w-[18%] h-screen opacity-100 bg-black flex row ">
+         <div className="fixed top-[49px] left-0 bottom-0 md:w-[18%] lg:w-[18%] h-screen opacity-100 bg-black flex row hidden lg:block md:block ">
           <Sidebar/>
          </div>
-         <div className="border-[1.1] border-gray-600  h-full ml-[18%]">
+         <div className="border-[1.1] border-gray-600  h-full md:ml-[18%] lg:ml-[18%] hidden md:block lg:block">
          </div>
          
         {children}
