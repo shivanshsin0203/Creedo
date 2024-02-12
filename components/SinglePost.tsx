@@ -17,18 +17,19 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
 
-const SinglePost = ({ post }:any) => {
+const SinglePost = ({ post }: any) => {
   const route = useRouter();
   const { user, isAuthenticated } = useKindeBrowserClient();
   const [comment, setComment] = useState<String>("");
   const [comments, setComments] = useState<any>([]);
   const [socket, setSocket] = useState<any>(null);
-  const handleUserClick = async (comment:any) => {
-    
-    const result= await axios.post('http://localhost:3005/finduser',{email:comment.creator})
-    
-    const userId=result.data.result[0]._id;
-    route.push(`profilepage/${userId}`)
+  const handleUserClick = async (comment: any) => {
+    const result = await axios.post("http://localhost:3005/finduser", {
+      email: comment.creator,
+    });
+
+    const userId = result.data.result[0]._id;
+    route.push(`profilepage/${userId}`);
   };
 
   const updateLike = async () => {
@@ -40,37 +41,33 @@ const SinglePost = ({ post }:any) => {
   };
   const handleComment = async () => {
     if (isAuthenticated) {
-      const result =  axios.post("http://localhost:3005/addcomment", {
+      const result = axios.post("http://localhost:3005/addcomment", {
         postid: post._id,
         comment: comment,
         creator: user?.email,
         profilepic: user?.picture,
-        
       });
       const newComment = {
         comment: comment,
         creator: user?.email,
-        
       };
-      setComments((prev: any) => [...prev, newComment] );
+      setComments((prev: any) => [...prev, newComment]);
       setComment("");
-      socket.emit("comment", {creator:post?.creator})
+      socket.emit("comment", { creator: post?.creator });
     } else {
       route.push("/api/auth/login");
     }
   };
- 
+
   useEffect(() => {
     async function fetchData() {
-      
       const result = await axios.post("http://localhost:3005/getcomments", {
         postid: post._id,
       });
-      
+
       setComments(result.data.result);
     }
     fetchData();
-   
   }, []);
   useEffect(() => {
     const newSocket = io("http://localhost:3001", {
@@ -85,7 +82,7 @@ const SinglePost = ({ post }:any) => {
     });
 
     setSocket(newSocket);
-  }, [user]); 
+  }, [user]);
   return (
     <div className="w-full h-auto bg-black p-3">
       <div className=" md:w-[72%] lg:w-[72%] w-full h-auto bg-[#1A1A1B] md:ml-[58px]  lg:ml-[58px] ml-0 mb-3 flex space-x-4">
@@ -104,7 +101,7 @@ const SinglePost = ({ post }:any) => {
             </Avatar>
             <span
               className="text-xs text-slate-300 font-semibold hover:underline cursor-pointer"
-              onClick={()=>handleUserClick}
+              onClick={() => handleUserClick}
             >
               {post.creator}
             </span>
@@ -117,7 +114,7 @@ const SinglePost = ({ post }:any) => {
             </div>
             <Carousel className="w-[80%] mt-2 mb-6">
               <CarouselContent className="w-full h-[20%]">
-                {post.image.map((image:any, index:any) => (
+                {post.image.map((image: any, index: any) => (
                   <CarouselItem key={index}>
                     <Image
                       src={image}
@@ -158,19 +155,16 @@ const SinglePost = ({ post }:any) => {
           comments.map((comment: any, index: any) => (
             <div key={index} className=" flex flex-col space-y-1 mb-7 p-3">
               <div className=" flex space-x-3">
-              <Avatar className="w-4 h-4">
-                <AvatarImage src={comment?.profilepic || ""} />
-                <AvatarFallback>{comment?.creator?.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <span
-                className="text-xs text-slate-300 font-semibold hover:underline cursor-pointer"
-                
-              >
-                {comment.creator}
-              </span>
+                <Avatar className="w-4 h-4">
+                  <AvatarImage src={comment?.profilepic || ""} />
+                  <AvatarFallback>{comment?.creator?.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <span className="text-xs text-slate-300 font-semibold hover:underline cursor-pointer">
+                  {comment.creator}
+                </span>
               </div>
               <div>
-              <p className="text-slate-200 font-normal text-lg ml-[38px]">{`${comment.comment}`}</p>
+                <p className="text-slate-200 font-normal text-lg ml-[38px]">{`${comment.comment}`}</p>
               </div>
             </div>
           ))
