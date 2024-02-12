@@ -19,9 +19,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { routeModule } from "next/dist/build/templates/app-page";
 import HomeSkeleton from "./HomeSkeleton";
 const Feed = () => {
-  const [posts, setPosts] = useState([]); // Use any type for posts
-  const [first, setFirst] = useState(true);
-  const [hasMore,sethasMore]=useState(true)
+  const [posts, setPosts] = useState<any>([]); // Use any type for posts
+  const [first, setFirst] = useState<any>(true);
+  const [hasMore,sethasMore]=useState<any>(true)
   const route = useRouter();
   let length = posts.length;
   useEffect(() => {
@@ -50,7 +50,7 @@ const Feed = () => {
     if (Array.isArray(result.data.data) && result.data.data.length > 0) {
      
       console.log(posts)
-      setPosts((prev) => [...prev, ...result.data.data]);
+      setPosts((prev:any) => [...prev, ...result.data.data]);
       console.log(length + " length");
       length = length + 2;
       
@@ -66,7 +66,7 @@ const Feed = () => {
     route.push(`profilepage/${post.creator}`)
   }
   async function updateLike(post:any) {
-    const postIndex = posts.findIndex(postprev => postprev._id === post._id);
+    const postIndex = posts.findIndex((postprev: any) => postprev._id === post._id);
     if(postIndex !== -1) {
       const newPosts:any = [...posts];
       newPosts[postIndex].likes += 1;

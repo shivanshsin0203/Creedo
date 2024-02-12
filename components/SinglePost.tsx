@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
 
-const SinglePost = ({ post }) => {
+const SinglePost = ({ post }:any) => {
   const route = useRouter();
   const { user, isAuthenticated } = useKindeBrowserClient();
   const [comment, setComment] = useState<String>("");
@@ -44,7 +44,8 @@ const SinglePost = ({ post }) => {
         postid: post._id,
         comment: comment,
         creator: user?.email,
-        profilepic: user?.profilepic,
+        profilepic: user?.picture,
+        
       });
       const newComment = {
         comment: comment,
@@ -116,7 +117,7 @@ const SinglePost = ({ post }) => {
             </div>
             <Carousel className="w-[80%] mt-2 mb-6">
               <CarouselContent className="w-full h-[20%]">
-                {post.image.map((image, index) => (
+                {post.image.map((image:any, index:any) => (
                   <CarouselItem key={index}>
                     <Image
                       src={image}
