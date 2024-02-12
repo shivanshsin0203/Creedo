@@ -1,11 +1,20 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
 import axios from "axios"
 import {useTypewriter,Cursor,Typewriter} from "react-simple-typewriter"
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 const Page =  () => {
   const route = useRouter();
-
+  const {user}=useKindeBrowserClient();
+  useEffect(() => {
+    async function adddata(){
+    const result= await axios.post('https://creedo.onrender.com/register',user)
+    console.log(result);
+    }
+    adddata();
+  },[user])
   return (
     <div className=" h-screen w-screen bg-black flex flex-col">
       <div>
