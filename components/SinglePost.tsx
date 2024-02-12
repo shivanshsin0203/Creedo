@@ -70,7 +70,7 @@ const SinglePost = ({ post }: any) => {
     fetchData();
   }, []);
   useEffect(() => {
-    const newSocket = io("http://localhost:3001", {
+    const newSocket = io("https://creedo-socket.onrender.com", {
       withCredentials: true,
       extraHeaders: {
         "my-custom-header": "abcd",
