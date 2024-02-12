@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const Profile = ({ user }) => {
+const Profile = ({ user }:any) => {
   const [posts, setPosts] = useState<any>([]);
   const router = useRouter();
   useEffect(() => {
@@ -32,7 +32,7 @@ const Profile = ({ user }) => {
     fetchData();
   }, [user]);
   async function updateLike(post: any) {
-    const newPosts = posts.map((p) => {
+    const newPosts = posts.map((p:any) => {
       if (p._id === post._id) {
         return { ...p, likes: p.likes + 1 };
       }
@@ -103,7 +103,7 @@ const Profile = ({ user }) => {
                   </div>
                   <Carousel className="w-[80%]">
                     <CarouselContent className="w-full h-[20%]">
-                      {post.image.map((image, index) => (
+                      {post.image.map((image: any, index: any) => (
                         <CarouselItem key={index}>
                           <Image
                             src={image}

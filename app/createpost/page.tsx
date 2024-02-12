@@ -68,9 +68,9 @@ const Dropzone = () => {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/*",
+    accept: "image/*" as any,
     maxSize: 1024 * 1000,
-    onDrop,
+    onDrop: (acceptedFiles, fileRejections, event) => onDrop(acceptedFiles, fileRejections.map(fileRejection => fileRejection.file)),
   });
 
   useEffect(() => {
