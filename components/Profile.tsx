@@ -22,7 +22,7 @@ const Profile = ({ user }:any) => {
       if (user) {
         // Ensure user is not empty before making the request
         console.log(user);
-        const result = await axios.post("https://creedo.onrender.com/getpostbymail", {
+        const result = await axios.post("https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/getpostbymail", {
           email: user.email,
         }); // Pass user email to the request
         console.log(result.data.result);
@@ -39,7 +39,7 @@ const Profile = ({ user }:any) => {
       return p;
     });
     setPosts(newPosts);
-    await axios.post("https://creedo.onrender.com/updatelike", { id: post._id });
+    await axios.post("https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/updatelike", { id: post._id });
   }
 
   function handleUserClick(post: any) {}

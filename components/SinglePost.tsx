@@ -24,7 +24,7 @@ const SinglePost = ({ post }: any) => {
   const [comments, setComments] = useState<any>([]);
   const [socket, setSocket] = useState<any>(null);
   const handleUserClick = async (comment: any) => {
-    const result = await axios.post("https://creedo.onrender.com/finduser", {
+    const result = await axios.post("https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/finduser", {
       email: comment.creator,
     });
 
@@ -41,7 +41,7 @@ const SinglePost = ({ post }: any) => {
   };
   const handleComment = async () => {
     if (isAuthenticated) {
-      const result = axios.post("https://creedo.onrender.com/addcomment", {
+      const result = axios.post("https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/addcomment", {
         postid: post._id,
         comment: comment,
         creator: user?.email,
@@ -61,7 +61,7 @@ const SinglePost = ({ post }: any) => {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.post("https://creedo.onrender.com/getcomments", {
+      const result = await axios.post("https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/getcomments", {
         postid: post._id,
       });
 

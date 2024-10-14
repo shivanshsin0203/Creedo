@@ -10,7 +10,7 @@ const Page =  () => {
   const {user}=useKindeBrowserClient();
   useEffect(() => {
     async function adddata(){
-    const result= await axios.post('https://creedo.onrender.com/register',user)
+    const result= await axios.post('https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/register',user)
     console.log(result);
     }
     adddata();

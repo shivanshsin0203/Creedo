@@ -17,7 +17,7 @@ const Connection = () => {
   const [loading,setLoading]=useState<boolean>(true);
   const router = useRouter();
   async function getPendingRequests() {
-    const result = await axios.post("https://creedo.onrender.com/getfriendrequests", { email: user?.email });
+    const result = await axios.post("https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/getfriendrequests", { email: user?.email });
     setRequests(result.data.result);
     console.log(result.data.result);
   }
@@ -28,7 +28,7 @@ const Connection = () => {
   };
   
   async function getFriends() {
-    const result = await axios.post("https://creedo.onrender.com/getconnections", { email: user?.email });
+    const result = await axios.post("https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/getconnections", { email: user?.email });
     console.log(result.data.result);
     setFriends(result.data.result);
     
@@ -38,7 +38,7 @@ const Connection = () => {
     const data=requests.filter((item:any)=>item.from!==request.from);
     setRequests(data);
     toast("Friend Request Accepted");
-    const responce=axios.post('https://creedo.onrender.com/acceptfriendrequest',{requestid:request._id,user1_email:user?.email,user1_name:user?.given_name,user1_picture:user?.picture,user2_email:request.from,user2_name:request.name,user2_picture:request.picture});
+    const responce=axios.post('https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/acceptfriendrequest',{requestid:request._id,user1_email:user?.email,user1_name:user?.given_name,user1_picture:user?.picture,user2_email:request.from,user2_name:request.name,user2_picture:request.picture});
     console.log(responce);
     const add: any = [...friends, {
       freind_email: request.from,
@@ -52,7 +52,7 @@ const Connection = () => {
     const data=requests.filter((item:any)=>item.from!==request.from);
     setRequests(data);
     toast("Friend Request Rejected");
-    const response=axios.post('https://creedo.onrender.com/deletefriendrequest',{requestid:request._id})
+    const response=axios.post('https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/deletefriendrequest',{requestid:request._id})
     console.log(response);
   }
   useEffect(() => {

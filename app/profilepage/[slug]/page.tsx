@@ -13,7 +13,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       async function fetchData() {
         console.log(params.slug)
 
-        const result= await axios.post('https://creedo.onrender.com/finduser', {
+        const result= await axios.post('https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/finduser', {
           email: convertedEmail})
           console.log(result.data.result[0])
           setUser(result.data.result[0]);

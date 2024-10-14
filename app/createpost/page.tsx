@@ -33,7 +33,7 @@ const Dropzone = () => {
       router.push('/api/auth/login')
       return;
     }
-    const result = await axios.post("https://creedo.onrender.com/createpost", {
+    const result = await axios.post("https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/createpost", {
         creator: user?.email,
         title: title,
         discription: discription,

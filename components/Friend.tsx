@@ -28,7 +28,7 @@ const AddFriend = () => {
   async function addFriend() {
     try {
       const resultReceived = await axios.post(
-        "https://creedo.onrender.com/addfriend",
+        "https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/addfriend",
         { to: email, from: from,name:username,picture:userPic },
       );
 

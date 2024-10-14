@@ -18,7 +18,7 @@ const AddFriend = () => {
     const [email,setEmail] = useState('');
     const [result,setResult] = useState('');
     async function addFriend(){
-        const result=axios.post('https://creedo.onrender.com/addfriend',{email:email})
+        const result=axios.post('https://1wkig1twra.execute-api.ap-south-1.amazonaws.com/addfriend',{email:email})
     }
   return (
      (
